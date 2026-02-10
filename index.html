@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка бдительности | Беларусь 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 50px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .red { background: #ff4444; color: white; padding: 20px; border-radius: 15px 15px 0 0; }
+        .green { background: #44cc44; color: white; padding: 20px; border-radius: 15px 15px 0 0; }
+        button {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px 0;
+            width: 100%;
+        }
+        .timer {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+            color: #ff4444;
+        }
+        .hidden { display: none; }
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        .flag { font-size: 24px; }
+    </style>
+</head>
+<body>
+    <!-- ПРИМАНКА -->
+    <div class="card" id="bait">
+        <div class="red">
+            <h1>⚠️ ВАШ АККАУНТ ПОД УГРОЗОЙ!</h1>
+            <p>Система безопасности обнаружила подозрительную активность</p>
+        </div>
+        <div style="padding: 20px;">
+            <p><strong>Обнаружено:</strong> 3 попытки несанкционированного доступа</p>
+            <p>Входы из: 🇵🇱 Польша, 🇱🇹 Литва</p>
+            
+            <div class="timer" id="timer">02:00</div>
+            <p style="color: #ff4444; font-weight: bold;">⏳ До автоматической блокировки</p>
+            
+            <button onclick="showLesson()">🔒 НЕМЕДЛЕННО ЗАЩИТИТЬ АККАУНТ</button>
+            
+            <div class="stats">
+                <h3>📊 Сегодня в Беларуси:</h3>
+                <p>• 64 аккаунта уже взломано</p>
+                <p>• 88% пользователей в зоне риска</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- УРОК (скрыт сначала) -->
+    <div class="card hidden" id="lesson">
+        <div class="green">
+            <h1>🎯 ТЕСТ ПРОЙДЕН!</h1>
+            <p><span class="flag">🇧🇾</span> День безопасного интернета 2025</p>
+        </div>
+        <div style="padding: 20px; text-align: left;">
+            <h3>Вы только что попались на фишинговую удочку!</h3>
+            <p>Именно так выглядят современные мошеннические схемы.</p>
+            
+            <div class="stats">
+                <h4>🔍 Что должно было насторожить:</h4>
+                <p>1. Срочность и давление (таймер, красный цвет)</p>
+                <p>2. Обобщённые угрозы без конкретики</p>
+                <p>3. Требование немедленных действий</p>
+            </div>
+            
+            <div class="stats" style="border-left-color: #28a745;">
+                <h4><span class="flag">🇧🇾</span> Реальная статистика Беларуси (2025):</h4>
+                <p>• <strong>8,500+</strong> фишинговых атак в день</p>
+                <p>• <strong>425,000</strong> пострадавших от мошенников</p>
+                <p>• <strong>2,850 BYN</strong> средний ущерб</p>
+                <p>• Банки возвращают <strong>только 12%</strong> средств</p>
+            </div>
+            
+            <button onclick="location.reload()" style="background: #007bff;">
+                🔄 Пройти тест ещё раз
+            </button>
+            
+            <p style="text-align: center; margin-top: 20px; color: #666;">
+                Поделитесь этим тестом с друзьями!<br>
+                <small>Повышаем цифровую грамотность вместе</small>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Таймер обратного отсчёта
+        let timeLeft = 120;
+        const timerEl = document.getElementById('timer');
+        
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            timerEl.textContent = 
+                (minutes < 10 ? '0' : '') + minutes + ':' + 
+                (seconds < 10 ? '0' : '') + seconds;
+            
+            if (timeLeft <= 30) {
+                timerEl.style.color = '#ff0000';
+                timerEl.style.textShadow = '0 0 10px rgba(255,0,0,0.5)';
+            }
+            
+            if (timeLeft > 0) {
+                timeLeft--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                showLesson();
+            }
+        }
+        
+        updateTimer();
+        
+        // Показать урок
+        function showLesson() {
+            document.getElementById('bait').classList.add('hidden');
+            document.getElementById('lesson').classList.remove('hidden');
+        }
+        
+        // Автоматический показ через 30 секунд
+        setTimeout(showLesson, 30000);
+    </script>
+</body>
+</html>
