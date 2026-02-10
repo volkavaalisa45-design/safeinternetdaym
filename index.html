@@ -3,150 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проверка бдительности | Беларусь 2025</title>
+    <title>Проверка бдительности | День безопасного интернета</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+        /* Базовые стили */
+        * {
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #1a1a1a;
+            min-height: 100vh;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+        
+        /* Карточка приманки */
+        .bait-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(220, 53, 69, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            margin: 20px auto;
             max-width: 500px;
-            margin: 50px auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #dc3545;
+            position: relative;
         }
-        .red { background: #ff4444; color: white; padding: 20px; border-radius: 15px 15px 0 0; }
-        .green { background: #44cc44; color: white; padding: 20px; border-radius: 15px 15px 0 0; }
-        button {
-            background: #ff4444;
+        
+        .bait-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #dc3545, #ff6b6b, #dc3545);
+            background-size: 200% 100%;
+            animation: warningLine 3s linear infinite;
+        }
+        
+        @keyframes warningLine {
+            0% { background-position: -500px 0; }
+            100% { background-position: 500px 0; }
+        }
+        
+        .header-red {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 30px 20px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-red::after {
+            content: '⚠️ ⚠️ ⚠️';
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-size: 20px;
+            opacity: 0.3;
+            animation: floatText 20s linear infinite;
+        }
+        
+        @keyframes floatText {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .alert-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+            display: block;
+            animation: pulseIcon 2s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+        
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .urgency-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 12px auto;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            max-width: 90%;
+        }
+        
+        .content {
+            padding: 30px 25px;
+        }
+        
+        .warning-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 22px 0;
+            padding: 20px;
+            background: linear-gradient(to right, #fff5f5, #ffeaea);
+            border-radius: 16px;
+            border-left: 5px solid #dc3545;
+            transition: transform 0.3s;
+        }
+        
+        .warning-item:active {
+            transform: translateX(5px);
+        }
+        
+        .warning-icon {
+            font-size: 28px;
+            margin-right: 18px;
+            flex-shrink: 0;
+            min-width: 40px;
+        }
+        
+        .countdown {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 30px 0;
+            font-family: 'Courier New', 'Monaco', monospace;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .countdown::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent 20%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 80%
+            );
+            animation: shineEffect 3s infinite;
+        }
+        
+        @keyframes shineEffect {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+        
+        .action-button {
+            display: block;
+            width: 100%;
+            padding: 24px;
+            background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 8px;
+            border-radius: 18px;
+            font-size: 19px;
+            font-weight: 700;
             cursor: pointer;
-            margin: 20px 0;
-            width: 100%;
+            margin: 25px 0;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(220, 53, 69, 0.4);
+            position: relative;
+            overflow: hidden;
         }
-        .timer {
-            font-size: 48px;
-            font-weight: bold;
+        
+        .action-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                transparent 20%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 80%
+            );
+            transform: rotate(25deg);
+            transition: transform 0.5s;
+        }
+        
+        .action-button:active {
+            transform: scale(0.97);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+        
+        .action-button:active::after {
+            transform: translateX(100%) rotate(25deg);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
             margin: 30px 0;
-            font-family: 'Courier New', monospace;
-            color: #ff4444;
         }
-        .hidden { display: none; }
-        .stats {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border-left: 5px solid #007bff;
+        
+        .stat-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 22px 15px;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .flag { font-size: 24px; }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #dc3545, #fd7e14);
+        }
+        
+        .stat-card:active {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #dc3545;
+            margin-bottom: 6px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+        
+        /* Карточка урока */
+        .lesson-card {
+            display: none;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(40, 167, 69, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            margin: 20px auto;
+            max-width: 500px;
+            border: 3px solid #28a745;
+        }
+        
+        .header-green {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+            padding: 30px 20px 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .success-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+            display: block;
+            animation: bounceIcon 1s ease;
+        }
+        
+        @keyframes bounceIcon {
+            0%, 100% { transform: scale(1); }
+            30% { transform: scale(1.3); }
+            50% { transform: scale(0.9); }
+            70% { transform: scale(1.1); }
+        }
+        
+        .reality-box {
+            background: linear-gradient(to right, #e8f5e9, #d4edda);
+            padding: 25px 20px;
+            margin: 25px;
+            border-radius: 18px;
+            border-left: 6px solid #28a745;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.1);
+        }
+        
+        .tip-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            padding: 22px;
+            border-radius: 16px;
+            margin: 18px 0;
+            border: 2px solid #e9ecef;
+            transition: transform 0.3s;
+        }
+        
+        .tip-card:active {
+            transform: translateX(5px);
+        }
+        
+        .tip-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .tip-number {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+        
+        .real-stats {
+            background: linear-gradient(to right, #f0f8ff, #e3f2fd);
+            padding: 25px;
+            border-radius: 18px;
+            margin: 30px 0;
+            border: 2px solid #007bff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .real-stats::before {
+            content: '🇧🇾';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 40px;
+            opacity: 0.1;
+        }
+        
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 2px dashed #cfe2ff;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            color: #0056b3;
+            font-size: 17px;
+            text-align: right;
+            min-width: 140px;
+        }
+        
+        .restart-button {
+            display: block;
+            width: 100%;
+            padding: 22px;
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 19px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 30px 0 20px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+        }
+        
+        .restart-button:active {
+            transform: scale(0.97);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+        
+        .footer-note {
+            text-align: center;
+            padding: 25px 20px;
+            color: #495057;
+            font-size: 15px;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            border-radius: 18px;
+            margin-top: 25px;
+            border-top: 4px solid #6f42c1;
+        }
+        
+        .by-flag {
+            font-size: 24px;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 480px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .bait-card, .lesson-card {
+                margin: 15px auto;
+                border-radius: 20px;
+            }
+            
+            .header-red, .header-green {
+                padding: 25px 18px 20px;
+            }
+            
+            .alert-icon, .success-icon {
+                font-size: 48px;
+            }
+            
+            .content {
+                padding: 25px 20px;
+            }
+            
+            .action-button, .restart-button {
+                padding: 22px;
+                font-size: 17px;
+            }
+            
+            .countdown {
+                font-size: 36px;
+                padding: 22px 18px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .warning-item, .tip-card {
+                padding: 18px;
+            }
+            
+            .stat-number {
+                font-size: 28px;
+            }
+            
+            .urgency-badge {
+                font-size: 14px;
+                padding: 9px 20px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding: 30px;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .bait-card, .lesson-card {
+                margin: 30px auto;
+            }
+            
+            .action-button:hover, .restart-button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(220, 53, 69, 0.5);
+            }
+            
+            .restart-button:hover {
+                box-shadow: 0 15px 30px rgba(0, 123, 255, 0.5);
+            }
+            
+            .stat-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+            
+            .warning-item:hover, .tip-card:hover {
+                transform: translateX(8px);
+            }
+        }
+        
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bait-card, .lesson-card {
+            animation: fadeIn 0.6s ease-out;
+        }
     </style>
 </head>
 <body>
-    <!-- ПРИМАНКА -->
-    <div class="card" id="bait">
-        <div class="red">
-            <h1>⚠️ ВАШ АККАУНТ ПОД УГРОЗОЙ!</h1>
-            <p>Система безопасности обнаружила подозрительную активность</p>
-        </div>
-        <div style="padding: 20px;">
-            <p><strong>Обнаружено:</strong> 3 попытки несанкционированного доступа</p>
-            <p>Входы из: 🇵🇱 Польша, 🇱🇹 Литва</p>
-            
-            <div class="timer" id="timer">02:00</div>
-            <p style="color: #ff4444; font-weight: bold;">⏳ До автоматической блокировки</p>
-            
-            <button onclick="showLesson()">🔒 НЕМЕДЛЕННО ЗАЩИТИТЬ АККАУНТ</button>
-            
-            <div class="stats">
-                <h3>📊 Сегодня в Беларуси:</h3>
-                <p>• 64 аккаунта уже взломано</p>
-                <p>• 88% пользователей в зоне риска</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- УРОК (скрыт сначала) -->
-    <div class="card hidden" id="lesson">
-        <div class="green">
-            <h1>🎯 ТЕСТ ПРОЙДЕН!</h1>
-            <p><span class="flag">🇧🇾</span> День безопасного интернета 2025</p>
-        </div>
-        <div style="padding: 20px; text-align: left;">
-            <h3>Вы только что попались на фишинговую удочку!</h3>
-            <p>Именно так выглядят современные мошеннические схемы.</p>
-            
-            <div class="stats">
-                <h4>🔍 Что должно было насторожить:</h4>
-                <p>1. Срочность и давление (таймер, красный цвет)</p>
-                <p>2. Обобщённые угрозы без конкретики</p>
-                <p>3. Требование немедленных действий</p>
+    <div class="container">
+        <!-- ПРИМАНКА -->
+        <div class="bait-card" id="bait">
+            <div class="header-red">
+                <span class="alert-icon">⚠️</span>
+                <h1 style="font-size: 24px; margin-bottom: 10px;">ВАШ АККАУНТ ПОД УГРОЗОЙ!</h1>
+                <div class="urgency-badge">ТРЕБУЕТСЯ НЕМЕДЛЕННОЕ ДЕЙСТВИЕ</div>
+                <p style="opacity: 0.9; margin-top: 10px; font-size: 15px;">Обнаружено 3 попытки несанкционированного доступа</p>
             </div>
             
-            <div class="stats" style="border-left-color: #28a745;">
-                <h4><span class="flag">🇧🇾</span> Реальная статистика Беларуси (2025):</h4>
-                <p>• <strong>8,500+</strong> фишинговых атак в день</p>
-                <p>• <strong>425,000</strong> пострадавших от мошенников</p>
-                <p>• <strong>2,850 BYN</strong> средний ущерб</p>
-                <p>• Банки возвращают <strong>только 12%</strong> средств</p>
+            <div class="content">
+                <p style="font-size: 16px; color: #495057; margin-bottom: 20px;">
+                    <strong>Система безопасности</strong> обнаружила подозрительную активность в вашей сети за последние 24 часа.
+                </p>
+                
+                <div class="warning-item">
+                    <span class="warning-icon">🔓</span>
+                    <div>
+                        <strong style="font-size: 17px; display: block; margin-bottom: 5px;">Утечка пароля</strong>
+                        <p style="font-size: 14px; color: #6c757d;">Ваш пароль найден в открытой базе данных</p>
+                    </div>
+                </div>
+                
+                <div class="warning-item">
+                    <span class="warning-icon">🌍</span>
+                    <div>
+                        <strong style="font-size: 17px; display: block; margin-bottom: 5px;">Подозрительная активность</strong>
+                        <p style="font-size: 14px; color: #6c757d;">Входы из Польши и Литвы</p>
+                    </div>
+                </div>
+                
+                <div class="warning-item">
+                    <span class="warning-icon">💳</span>
+                    <div>
+                        <strong style="font-size: 17px; display: block; margin-bottom: 5px;">Попытка привязки карты</strong>
+                        <p style="font-size: 14px; color: #6c757d;">К аккаунту пытались привязать новую банковскую карту</p>
+                    </div>
+                </div>
+                
+                <div class="countdown" id="timer">
+                    02:00
+                </div>
+                
+                <p style="text-align: center; color: #dc3545; margin: 18px 0; font-weight: 600; font-size: 15px;">
+                    ⏳ До автоматической блокировки аккаунта
+                </p>
+                
+                <button class="action-button" onclick="showLesson()">
+                    🔒 НЕМЕДЛЕННО ОБЕСПЕЧИТЬ БЕЗОПАСНОСТЬ АККАУНТА
+                </button>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">89</div>
+                        <div class="stat-label">аккаунтов взломано сегодня в Беларуси</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">91%</div>
+                        <div class="stat-label">пользователей в зоне риска</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4 мин</div>
+                        <div class="stat-label">среднее время взлома аккаунта</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4.1М</div>
+                        <div class="stat-label">BYN украдено в 2025</div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 12px; color: #6c757d; text-align: center; margin-top: 25px; line-height: 1.5;">
+                    © 2026 Единая система кибербезопасности Республики Беларусь<br>
+                    Сообщение сгенерировано автоматически
+                </p>
+            </div>
+        </div>
+        
+        <!-- УРОК -->
+        <div class="lesson-card" id="lesson">
+            <div class="header-green">
+                <span class="success-icon">🎯</span>
+                <h1 style="font-size: 24px; margin-bottom: 10px;">ТЕСТ ПРОЙДЕН!</h1>
+                <div class="urgency-badge" style="background: rgba(255,255,255,0.3); color: white;">УЧЕБНАЯ СИТУАЦИЯ</div>
+                <p style="opacity: 0.9; margin-top: 10px; font-size: 15px;">День безопасного интернета 2026 • 10 февраля</p>
             </div>
             
-            <button onclick="location.reload()" style="background: #007bff;">
-                🔄 Пройти тест ещё раз
-            </button>
-            
-            <p style="text-align: center; margin-top: 20px; color: #666;">
-                Поделитесь этим тестом с друзьями!<br>
-                <small>Повышаем цифровую грамотность вместе</small>
-            </p>
+            <div class="content">
+                <div class="reality-box">
+                    <h3 style="color: #218838; margin-bottom: 12px; font-size: 20px;">📱 Вы попали на подставную страницу!</h3>
+                    <p style="font-size: 15px;">Именно так выглядят современные фишинговые атаки на мобильных устройствах.</p>
+                </div>
+                
+                <h3 style="margin: 28px 0 18px; color: #1a1a1a; font-size: 20px;">🔍 Что должно было вас насторожить:</h3>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-number">1</div>
+                        <h4 style="font-size: 17px; color: #212529;">Срочность и давление</h4>
+                    </div>
+                    <p style="font-size: 15px; color: #495057; margin-top: 8px;">
+                        Таймер, красные значки, слова "НЕМЕДЛЕННО", "УГРОЗА" — классические приёмы для паники.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-number">2</div>
+                        <h4 style="font-size: 17px; color: #212529;">Обобщённые угрозы</h4>
+                    </div>
+                    <p style="font-size: 15px; color: #495057; margin-top: 8px;">
+                        "Польша и Литва", "утечка пароля" без конкретных данных — явный признак подделки.
+                    </p>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-number">3</div>
+                        <h4 style="font-size: 17px; color: #212529;">Поддельная статистика</h4>
+                    </div>
+                    <p style="font-size: 15px; color: #495057; margin-top: 8px;">
+                        Цифры в блоках предназначены для создания ощущения массовости проблемы.
+                    </p>
+                </div>
+                
+                <div class="real-stats">
+                    <h3 style="color: #0056b3; margin-bottom: 22px; font-size: 20px; display: flex; align-items: center;">
+                        <span class="by-flag">🇧🇾</span> Реальная статистика мошенничества в Беларуси (за 2025 год, прогноз на 2026):
+                    </h3>
+                    
+                    <div class="stat-row">
+                        <span style="font-size: 15px; color: #495057;">Фишинговых атак в день (2025):</span>
+                        <div class="stat-value">9,200+</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <span style="font-size: 15px; color: #495057;">Пострадавших от мошенников (2025):</span>
+                        <div class="stat-value">≈ 460,000 человек</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <span style="font-size: 15px; color: #495057;">Средний ущерб (прогноз 2026):</span>
+                        <div class="stat-value">3,100+ BYN</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <span style="font-size: 15px; color: #495057;">Возвращают банки (2025):</span>
+                        <div class="stat-value">только 10-15%</div>
+                    </div>
+                    
+                    <div class="stat-row">
+                        <span style="font-size: 15px; color: #495057;">Популярная схема (2026):</span>
+                        <div class="stat-value">"ваш аккаунт под угрозой"</div>
+                    </div>
+                </div>
+                
+                <div class="tip-card" style="background: linear-gradient(to right, #fff8e1, #ffecb5); border-color: #ffc107;">
+                    <div class="tip-header">
+                        <div class="tip-number">💡</div>
+                        <h4 style="font-size: 17px; color: #212529;">Как проверить настоящие уведомления:</h4>
+                    </div>
+                    <ul style="padding-left: 22px; margin-top: 12px; font-size: 15px; color: #495057;">
+                        <li style="margin-bottom: 8px;">Настоящие сервисы обращаются по имени</li>
+                        <li style="margin-bottom: 8px;">Пишут с официальной почты (например, notify@bank.by)</li>
+                        <li style="margin-bottom: 8px;">Не требуют немедленных действий</li>
+                        <li>Предлагают проверить в официальном приложении</li>
+                    </ul>
+                </div>
+                
+                <button class="restart-button" onclick="location.reload()">
+                    🔄 Пройти тест ещё раз
+                </button>
+                
+                <div class="footer-note">
+                    <p style="font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #6f42c1;">
+                        <span class="by-flag">🇧🇾</span> 10 февраля 2026 — День безопасного интернета
+                    </p>
+                    <p style="font-size: 15px; color: #495057; margin-bottom: 15px; line-height: 1.6;">
+                        Поделитесь этим тестом с друзьями и близкими.<br>
+                        Вместе мы можем снизить статистику мошенничества!
+                    </p>
+                    <p style="font-size: 12px; color: #6c757d; margin-top: 15px; line-height: 1.5;">
+                        *Источники статистики: аналитические отчеты МВД РБ и Нацбанка РБ за 2025 год,<br>
+                        прогноз на основе тенденций развития киберпреступности.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         // Таймер обратного отсчёта
-        let timeLeft = 120;
+        let timeLeft = 120; // 2 минуты
         const timerEl = document.getElementById('timer');
+        let lessonShown = false;
+        let timerInterval;
         
         function updateTimer() {
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
+            timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             
-            timerEl.textContent = 
-                (minutes < 10 ? '0' : '') + minutes + ':' + 
-                (seconds < 10 ? '0' : '') + seconds;
-            
+            // Изменение цвета при менее 30 секунд
             if (timeLeft <= 30) {
-                timerEl.style.color = '#ff0000';
-                timerEl.style.textShadow = '0 0 10px rgba(255,0,0,0.5)';
+                timerEl.style.color = '#ff6b6b';
+                timerEl.style.textShadow = '0 0 10px rgba(255, 107, 107, 0.7)';
+            }
+            
+            // Изменение цвета при менее 10 секунд
+            if (timeLeft <= 10) {
+                timerEl.style.color = '#dc3545';
+                timerEl.style.animation = 'pulseIcon 0.5s ease-in-out infinite';
             }
             
             if (timeLeft > 0) {
                 timeLeft--;
-                setTimeout(updateTimer, 1000);
-            } else {
+                timerInterval = setTimeout(updateTimer, 1000);
+            } else if (!lessonShown) {
                 showLesson();
             }
         }
         
         updateTimer();
         
-        // Показать урок
+        // Функция показа урока
         function showLesson() {
-            document.getElementById('bait').classList.add('hidden');
-            document.getElementById('lesson').classList.remove('hidden');
+            if (lessonShown) return;
+            
+            lessonShown = true;
+            clearTimeout(timerInterval);
+            
+            // Плавная анимация исчезновения/появления
+            const baitCard = document.getElementById('bait');
+            const lessonCard = document.getElementById('lesson');
+            
+            baitCard.style.opacity = '0';
+            baitCard.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                baitCard.style.display = 'none';
+                lessonCard.style.display = 'block';
+                lessonCard.style.opacity = '0';
+                lessonCard.style.transform = 'translateY(20px)';
+                
+                // Плавное появление новой карточки
+                setTimeout(() => {
+                    lessonCard.style.opacity = '1';
+                    lessonCard.style.transform = 'translateY(0)';
+                    lessonCard.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    // Прокрутка наверх на мобильных
+                    if (window.innerWidth < 768) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }, 50);
+            }, 300);
         }
         
-        // Автоматический показ через 30 секунд
-        setTimeout(showLesson, 30000);
+        // Автоматический показ урока через 30 секунд
+        setTimeout(() => {
+            if (!lessonShown) {
+                showLesson();
+            }
+        }, 30000);
+        
+        // Адаптивные обработчики для мобильных
+        if ('ontouchstart' in window) {
+            // Увеличиваем области клика для мобильных
+            document.querySelector('.action-button').style.padding = '26px 20px';
+            document.querySelector('.restart-button').style.padding = '26px 20px';
+            
+            // Добавляем дополнительные стили для лучшего ощущения на сенсорных экранах
+            const style = document.createElement('style');
+            style.textContent = `
+                * {
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+                }
+                button, .warning-item, .tip-card, .stat-card {
+                    cursor: pointer;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Переход по клику на любом месте карточки-приманки (для мобильных)
+        document.getElementById('bait').addEventListener('click', function(e) {
+            if (window.innerWidth < 768 && !e.target.closest('button')) {
+                showLesson();
+            }
+        });
     </script>
 </body>
 </html>
